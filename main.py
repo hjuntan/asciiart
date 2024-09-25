@@ -1,5 +1,4 @@
 import os, sys
-
 from PIL import Image
 
 def get_image():
@@ -20,11 +19,21 @@ def get_image():
 
 def main():
     image = get_image()
-    
-    # Display the image
-    image.show()
+
+    # Convert the image to grayscale
+    image = image.convert("L")
 
     height, width = image.size
     print(f"Image size: {height}x{width}")
+
+    # Print the pixel values
+    for y in range(height):
+        for x in range(width):
+            pixel = image.getpixel((x, y))
+            print(f"{pixel:3}", end=" ")
+        print()
+
+    # Display the image
+    image.show()
 
 main()
