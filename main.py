@@ -27,21 +27,27 @@ def get_scale():
 
     return scale
 
+
 def custom_grayscale(image):
     # Custom grayscale conversion
     width, height = image.size
     grayscale_image = Image.new("L", (width, height))
+    
     for y in range(height):
         for x in range(width):
             pixel = image.getpixel((x, y))
+
             if len(pixel) == 4:  # RGBA
                 r, g, b, a = pixel
             else:  # RGB
                 r, g, b = pixel
+            
             # Custom formula for grayscale conversion
             gray = int((r + g + b) / 3)
             grayscale_image.putpixel((x, y), gray)
+    
     return grayscale_image
+
 
 def process_image(image, scale):
     # Convert the image to grayscale
