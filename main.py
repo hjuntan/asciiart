@@ -3,7 +3,7 @@ import math
 from PIL import Image
 
 custom_grayscale = False
-terminal_print = True
+terminal_print = False
 
 # Change these values to adjust the resolution of the output
 max_width = 400
@@ -106,6 +106,7 @@ def print_image(image, scale):
                 file.write(scale[brightness] * 3)
             file.write("\n")
         
+        print("Output saved to output.txt!")
         file.close()
 
 
