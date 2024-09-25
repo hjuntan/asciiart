@@ -17,13 +17,25 @@ def get_image():
 
     return image
 
+def get_scale():
+    # Get the scale
+    file = open("scale.txt", "r")
+    scale = file.read().split('\n')
+    file.close()
+
+    print("Scale:" + scale[0])
+
+    return scale
+
 def main():
     image = get_image()
+
+    scale = get_scale()
 
     # Convert the image to grayscale
     image = image.convert("L")
 
-    height, width = image.size
+    width, height = image.size
     print(f"Image size: {height}x{width}")
 
     # Print the pixel values
