@@ -2,6 +2,13 @@ import os, sys
 import math
 from PIL import Image
 
+custom_grayscale = False
+terminal_print = True
+
+# Change these values to adjust the resolution of the output
+max_width = 400
+max_height = 200
+
 def get_image():
     # Get the path to the image
     try:
@@ -53,13 +60,10 @@ def process_image(image, scale):
     # Convert the image to grayscale
     # Either use the custom grayscale conversion or the built-in one
 
-    #image = image.convert("L") # Built-in grayscale conversion
-    image = custom_grayscale(image) # Custom grayscale conversion
-
-    # Resize the image to fit within the terminal. 
-    # Change these to change the resolution of the output
-    max_width = 400  # Adjust this value based on your terminal width
-    max_height = 200  # Adjust this value based on your terminal height
+    if custom_grayscale:
+        image = custom_grayscale(image) # Custom grayscale conversion
+    else:
+        image = image.convert("L") # Built-in grayscale conversion
 
     # Calculate the new dimensions while maintaining the aspect ratio
     aspect_ratio = image.width / image.height
@@ -78,18 +82,31 @@ def process_image(image, scale):
     image = image.resize((new_width, new_height))
     return image
 
-
 def print_image(image, scale):
     width, height = image.size
-    print(f"Image size: {height}x{width}")
 
-    # Print the pixel values
-    for y in range(height):
-        for x in range(width):
-            pixel = image.getpixel((x, y))
-            brightness = math.floor(pixel * len(scale) / 256)
-            print(scale[brightness] * 2, end="")
-        print()
+    if terminal_print:
+
+        # Print the pixel values
+        for y in range(height):
+            for x in range(width):
+                pixel = image.getpixel((x, y))
+                brightness = math.floor(pixel * len(scale) / 256)
+                print(scale[brightness] * 2, end="")
+            print()
+
+    else:
+
+        file = open("output.txt", "w")
+
+        for y in range(height):
+            for x in range(width):
+                pixel = image.getpixel((x, y))
+                brightness = math.floor(pixel * len(scale) / 256)
+                file.write(scale[brightness] * 3)
+            file.write("\n")
+        
+        file.close()
 
 
 def main():
@@ -100,6 +117,5 @@ def main():
     image = process_image(image, scale)
 
     print_image(image, scale)
-
 
 main()
