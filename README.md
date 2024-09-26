@@ -57,29 +57,27 @@ One additional thing:
 
 One aspect I tested is the difference between varios greyscale convertions:
 
-![Original image](./images/cowboy.jpg)
-
 <p align="center">
+    <img src="./images/cowboy.jpg" />
     Original image
+    <img src="./images/built-in-function.png" width="450" /> <img src="./images/all-averaged.png" width="450" />
 </p>
-
-<img src="./images/built-in-function.png" width="200" /> <img src="./images/all-averaged.png" width="200" />
 
 On the left is the built-in Pillow function while on the right is using a the formula: (r + g + b) / 3. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
 
-![Original image](./images/leaf.jpg)
-
 <p align="center">
+    <img src="./images/leaf.jpg" />
     Original image
+    <img src="./images/leaf-built-in.png" width="450" /> <img src="./images/leaf-all-averaged.png" width="450" />
 </p>
 
-<img src="./images/leaf-built-in.png" width="200" /> <img src="./images/leaf-all-averaged.png" width="200" />
-
-The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
+On the left is the built-in Pillow function while on the right is using a the formula: (r + g + b) / 3. The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
 
 When compared to the original images, the ASCII art produced by our model retains a high level of visual integrity.
 
-<img src="./images/unsquished.png" width="200" /> <img src="./images/zebra.jpg" width="200" />
+<p align="center">
+    <img src="./images/unsquished.png" width="450" /> <img src="./images/zebra.jpg" width="450" />
+</p>
 
 Nevertheless, there are drawbacks, like the loss of detail in extremely complicated images, which could be fixed by improving the model's sensitivity to subtle tonal changes, adding colour in future iterations, or even improving pixel detection, for instance: putting a '/' at edges instead of using a '*'.
 
@@ -89,5 +87,5 @@ Even though this project successfully shows that automated ASCII art generation 
 The project was developed in Python, utilizing libraries such as Pillow for image processing. Data was sourced from googling different images, mainly for testing purposes.
 
 <p align="center">
-    [zebra](https://animaldiversity.org/accounts/Equus_zebra/) [white screen](https://www.ledr.com/colours/white.htm) [cowboy man](https://pixabay.com/photos/people-cowboy-male-hat-person-875597/)
+    <a href="https://animaldiversity.org/accounts/Equus_zebra/">zebra</a> <a href="https://www.ledr.com/colours/white.htm">white screen</a> <a href="https://pixabay.com/photos/people-cowboy-male-hat-person-875597/">cowboy man</a> 
 </p>
