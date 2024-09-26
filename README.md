@@ -50,13 +50,13 @@ During this project, I noticed that the image printed is "squished", as it was s
 
 An easy fix is to double or triple each character every time it was printed.
 
-![Unsquished image](/images/unsquished.png)
+<img src="./images/unsquished.png" width="700"/>
 
 ### Challenge 2: Overflow of characters in a line
 
 One aspect of this project I found surprising tough is the limitation of printing characters in the terminal, as there is limit on how much characters can be printed out on a single line before it will overflow towards the next line.
 
-![Character overflow](/images/overflow-characters.png)
+<img src="./images/overflow-characters.png" width="700"/>
 
 One ways to overcome this issue is making a max limit on the height and width. If the width exceeds the set limit, resize the image using Pillow's in-build [resize](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.resize) function. Same goes for height. You can change the `max_width` and `max_height` found within the code.
 
@@ -75,7 +75,7 @@ One aspect I tested is the difference between various greyscale convertions:
     <img src="./images/built-in-function.png" width="650"/> <img src="./images/all-averaged.png" width="650"/>
 </p>
 
-The first image uses the built-in Pillow function while the second image uses the all-averaged approach. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
+The first image uses the built-in Pillow function while the second image uses the all-averaged approach. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. This formula is weighted towards green, making it particularly sensitive to the green hues dominant in the image:
 
 <p align="center">
     <img src="./images/leaf.jpg" width="500" />
@@ -85,9 +85,9 @@ The first image uses the built-in Pillow function while the second image uses th
     <img src="./images/leaf-built-in.png" width="650"/> <img src="./images/leaf-all-averaged.png" width="650"/>
 </p>
 
-The first image uses the built-in Pillow function while the second image uses the all-averaged approach. As you can see, the first image is much more detailed while the all-averaged approach's "color" is more "smoothen out".
+The first image uses the built-in Pillow function while the second image uses the all-averaged approach. As you can see, the first image is a highly detailed ASCII representation where the different shades and textures of the leaf are distinctly visible, capturing nuances in a way that closely mirrors the original's visual depth; while the second image "smooth out" some of the details, appears less textured and detailed compared to the first image, especially in areas with subtle color differences.
 
-This is more amplified by this example:
+This is further amplified by this example:
 
 <p align="center">
     <img src="./images/rgb.png" width="500" />
@@ -102,6 +102,8 @@ This is more amplified by this example:
     <br>
     All-averaged approach
 </p>
+
+## Conclusion
 
 When compared to the original images, the ASCII art produced by our model retains a high level of visual integrity.
 
