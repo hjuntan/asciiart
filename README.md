@@ -72,20 +72,20 @@ One aspect I tested is the difference between various greyscale convertions:
     <br>
     Original image
     <br>
-    <img src="./images/built-in-function.png" /> <img src="./images/all-averaged.png" />
+    <img src="./images/built-in-function.png" width="650"/> <img src="./images/all-averaged.png" width="650"/>
 </p>
 
-The first is the built-in Pillow function while the second is using the formula: (r + g + b) / 3. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
+The first image uses the built-in Pillow function while the second image uses the all-averaged approach. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
 
 <p align="center">
     <img src="./images/leaf.jpg" width="500" />
     <br>
     Original image
     <br>
-    <img src="./images/leaf-built-in.png" /> <img src="./images/leaf-all-averaged.png" />
+    <img src="./images/leaf-built-in.png" width="650"/> <img src="./images/leaf-all-averaged.png" width="650"/>
 </p>
 
-The first is the built-in Pillow function while the secomd is using a the formula: (r + g + b) / 3. The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
+The first image uses the built-in Pillow function while the second image uses the all-averaged approach. As you can see, the first image is much more detailed while the all-averaged approach's "color" is more "smoothen out".
 
 This is more amplified by this example:
 
@@ -94,11 +94,11 @@ This is more amplified by this example:
     <br>
     Original image
     <br>
-    <img src="./images/rgb-built-in.png" /> 
+    <img src="./images/rgb-built-in.png" width="650"/> 
     <br>
     Built-in function by Pillow
     <br>
-    <img src="./images/rgb-all-averaged.png" />
+    <img src="./images/rgb-all-averaged.png" width="650"/>
     <br>
     All-averaged approach
 </p>
