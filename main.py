@@ -3,7 +3,7 @@ import math
 from PIL import Image
 
 custom_grayscale = False
-terminal_print = False
+file_print = False
 
 # Change these values to adjust the resolution of the output
 max_width = 400
@@ -85,7 +85,21 @@ def process_image(image, scale):
 def print_image(image, scale):
     width, height = image.size
 
-    if terminal_print:
+    if file_print:
+
+        file = open("output.txt", "w")
+
+        for y in range(height):
+            for x in range(width):
+                pixel = image.getpixel((x, y))
+                brightness = math.floor(pixel * len(scale) / 256)
+                file.write(scale[brightness] * 3) # Different character width for txt file compared to terminal
+            file.write("\n")
+        
+        print("Output saved to output.txt!")
+        file.close()
+
+    else:
 
         # Print the pixel values
         for y in range(height):
@@ -94,20 +108,6 @@ def print_image(image, scale):
                 brightness = math.floor(pixel * len(scale) / 256)
                 print(scale[brightness] * 2, end="")
             print()
-
-    else:
-
-        file = open("output.txt", "w")
-
-        for y in range(height):
-            for x in range(width):
-                pixel = image.getpixel((x, y))
-                brightness = math.floor(pixel * len(scale) / 256)
-                file.write(scale[brightness] * 3)
-            file.write("\n")
-        
-        print("Output saved to output.txt!")
-        file.close()
 
 
 def main():
