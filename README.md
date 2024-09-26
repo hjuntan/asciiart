@@ -5,7 +5,7 @@ To try out this program, clone this repository and in the file directory, run:
 ```bash
 $ python main.py <your-file-path>
 ```
-where <your-file-path> is the file path of your image.
+where `<your-file-path>` is the file path of your image.
 
 ## Problem Domain and Project Description
 
@@ -15,13 +15,23 @@ I was curious on how to develop a system that transform visual images into ASCII
 
 This project involves two major parts, converting the image into a greyscale version of itself, and mapping the intensity of those greyscale pixels to their corresponding ASCII characters, which vary in visual density.
 
-The way to convert the image into greyscale is quite diverse: averaging the R, G and B values, taking a weighted average of the values, etc (lots more details [here](https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color)). The two main ways I convert the image into greyscale is: 
+The way to convert the image into greyscale is quite diverse: 
+
+1) average: averaging the values, 
+
+2) luminosity: taking a weighted average of the values, 
+
+3) lightness: min-maxing the values, etc 
+
+(lots more details [here](https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color)). 
+
+The two main ways I convert the image into greyscale is: 
 
 1) using the build-in greyscale convertor from [Pillow](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert), 
 
-2) and using an all-averaged approach using the formula: (r + g + b) / 3.
+2) and using an all-averaged approach by utilising the formula: (r + g + b) / 3.
 
-You can change different greyscale convertor by setting the `custom_grayscale` boolean and this section:
+You can change different greyscale convertor by setting the `use_custom_grayscale` boolean and this section:
 ```python
             # Custom formula for grayscale conversion
             gray = int((r + g + b) / 3)
@@ -55,28 +65,48 @@ One additional thing:
 
 ## Results and Comparison
 
-One aspect I tested is the difference between varios greyscale convertions:
+One aspect I tested is the difference between various greyscale convertions:
 
 <p align="center">
     <img src="./images/cowboy.jpg" />
+    <br>
     Original image
-    <img src="./images/built-in-function.png" width="450" /> <img src="./images/all-averaged.png" width="450" />
+    <br>
+    <img src="./images/built-in-function.png" /> <img src="./images/all-averaged.png" />
 </p>
 
-On the left is the built-in Pillow function while on the right is using a the formula: (r + g + b) / 3. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
+The first is the built-in Pillow function while the second is using the formula: (r + g + b) / 3. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
 
 <p align="center">
-    <img src="./images/leaf.jpg" />
+    <img src="./images/leaf.jpg" width="500" />
+    <br>
     Original image
-    <img src="./images/leaf-built-in.png" width="450" /> <img src="./images/leaf-all-averaged.png" width="450" />
+    <br>
+    <img src="./images/leaf-built-in.png" /> <img src="./images/leaf-all-averaged.png" />
 </p>
 
-On the left is the built-in Pillow function while on the right is using a the formula: (r + g + b) / 3. The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
+The first is the built-in Pillow function while the secomd is using a the formula: (r + g + b) / 3. The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
+
+This is more amplified by this example:
+
+<p align="center">
+    <img src="./images/rgb.png" width="500" />
+    <br>
+    Original image
+    <br>
+    <img src="./images/rgb-built-in.png" /> 
+    <br>
+    Built-in function by Pillow
+    <br>
+    <img src="./images/rgb-all-averaged.png" />
+    <br>
+    All-averaged approach
+</p>
 
 When compared to the original images, the ASCII art produced by our model retains a high level of visual integrity.
 
 <p align="center">
-    <img src="./images/unsquished.png" width="450" /> <img src="./images/zebra.jpg" width="450" />
+    <img src="./images/unsquished.png" /> <img src="./images/zebra.jpg" />
 </p>
 
 Nevertheless, there are drawbacks, like the loss of detail in extremely complicated images, which could be fixed by improving the model's sensitivity to subtle tonal changes, adding colour in future iterations, or even improving pixel detection, for instance: putting a '/' at edges instead of using a '*'.
@@ -84,8 +114,9 @@ Nevertheless, there are drawbacks, like the loss of detail in extremely complica
 Even though this project successfully shows that automated ASCII art generation is feasible for many applications, more work is required to produce outputs that are professional-grade, especially in areas of better quality and faster computation.
 
 ## Tools and Resources
-The project was developed in Python, utilizing libraries such as Pillow for image processing. Data was sourced from googling different images, mainly for testing purposes.
+The project was developed in Python, utilizing libraries such as [Pillow](https://pillow.readthedocs.io/en/stable/index.html) for image processing. Data was sourced from googling different images, mainly for testing purposes.
 
 <p align="center">
-    <a href="https://animaldiversity.org/accounts/Equus_zebra/">zebra</a> <a href="https://www.ledr.com/colours/white.htm">white screen</a> <a href="https://pixabay.com/photos/people-cowboy-male-hat-person-875597/">cowboy man</a> 
+    <a href="https://animaldiversity.org/accounts/Equus_zebra/">zebra</a> <a href="https://www.ledr.com/colours/white.htm">white screen</a> <a href="https://pixabay.com/photos/people-cowboy-male-hat-person-875597/">cowboy man</a> <a href="https://www.collinsdictionary.com/us/dictionary/english/leaf#google_vignette">leaf</a> <a href="https://www.schemecolor.com/rgb.php">red green blue</a>
+    
 </p>
