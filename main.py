@@ -2,12 +2,12 @@ import os, sys
 import math
 from PIL import Image
 
-custom_grayscale = False
+use_custom_grayscale = False
 file_print = False
 
 # Change these values to adjust the resolution of the output
-max_width = 400
-max_height = 200
+max_width = 600
+max_height = 300
 
 def get_image():
     # Get the path to the image
@@ -50,21 +50,13 @@ def custom_grayscale(image):
                 r, g, b = pixel
             
             # Custom formula for grayscale conversion
-            gray = int((r + g + b) / 3)
+            gray = int(r + g + b) // 3
             grayscale_image.putpixel((x, y), gray)
     
     return grayscale_image
 
 
 def process_image(image, scale):
-    # Convert the image to grayscale
-    # Either use the custom grayscale conversion or the built-in one
-
-    if custom_grayscale:
-        image = custom_grayscale(image) # Custom grayscale conversion
-    else:
-        image = image.convert("L") # Built-in grayscale conversion
-
     # Calculate the new dimensions while maintaining the aspect ratio
     aspect_ratio = image.width / image.height
     if image.width > max_width:
@@ -80,6 +72,14 @@ def process_image(image, scale):
 
     # Resize the image
     image = image.resize((new_width, new_height))
+
+    # Convert the image to grayscale
+    # Either use the custom grayscale conversion or the built-in one
+    if use_custom_grayscale:
+        image = custom_grayscale(image) # Custom grayscale conversion
+    else:
+        image = image.convert("L") # Built-in grayscale conversion
+    
     return image
 
 def print_image(image, scale):

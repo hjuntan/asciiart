@@ -16,8 +16,10 @@ I was curious on how to develop a system that transform visual images into ASCII
 This project involves two major parts, converting the image into a greyscale version of itself, and mapping the intensity of those greyscale pixels to their corresponding ASCII characters, which vary in visual density.
 
 The way to convert the image into greyscale is quite diverse: averaging the R, G and B values, taking a weighted average of the values, etc (lots more details [here](https://stackoverflow.com/questions/596216/formula-to-determine-perceived-brightness-of-rgb-color)). The two main ways I convert the image into greyscale is: 
-> using the build-in greyscale convertor from [Pillow](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert), 
-> and using a "custom" scale using the average of the R, G and B values: (R + G + B) / 3.
+
+1) using the build-in greyscale convertor from [Pillow](https://pillow.readthedocs.io/en/stable/reference/Image.html#PIL.Image.Image.convert), 
+
+2) and using an all-averaged approach using the formula: (r + g + b) / 3.
 
 You can change different greyscale convertor by setting the `custom_grayscale` boolean and this section:
 ```python
@@ -53,10 +55,39 @@ One additional thing:
 
 ## Results and Comparison
 
+One aspect I tested is the difference between varios greyscale convertions:
+
+![Original image](./images/cowboy.jpg)
+
+<p align="center">
+    Original image
+</p>
+
+<img src="./images/built-in-function.png" width="200" /> <img src="./images/all-averaged.png" width="200" />
+
+On the left is the built-in Pillow function while on the right is using a the formula: (r + g + b) / 3. There is only minute changes to the shading of the person's face, while the background is slightly altered. I think this is due to the very slight differences between the built-in Pillow function; which uses the formula: 0.299 * r + 0.587 * g + 0.114 * b; compared to the above formula. The images will look much different if the green is the more major aspect of the image:
+
+![Original image](./images/leaf.jpg)
+
+<p align="center">
+    Original image
+</p>
+
+<img src="./images/leaf-built-in.png" width="200" /> <img src="./images/leaf-all-averaged.png" width="200" />
+
+The built-in function is more detailed while the all-averaged approach's "color" is more "smoothen out".
+
 When compared to the original images, the ASCII art produced by our model retains a high level of visual integrity.
 
-![Sample zebra](/images/sample.txt) ![Original zebra](/images/zebra.jpg)
+<img src="./images/unsquished.png" width="200" /> <img src="./images/zebra.jpg" width="200" />
 
-Nevertheless, there are drawbacks, like the loss of detail in extremely complicated images, which could be fixed by improving the model's sensitivity to subtle tonal changes, adding colour in future iterations, or even improving pixel detection, for instance:
+Nevertheless, there are drawbacks, like the loss of detail in extremely complicated images, which could be fixed by improving the model's sensitivity to subtle tonal changes, adding colour in future iterations, or even improving pixel detection, for instance: putting a '/' at edges instead of using a '*'.
 
-Even though this project successfully shows that automated ASCII art generation is feasible for many applications, more work is required to produce outputs that are professional-grade, especially in areas like real-time processing and dynamic resolution scaling.
+Even though this project successfully shows that automated ASCII art generation is feasible for many applications, more work is required to produce outputs that are professional-grade, especially in areas of better quality and faster computation.
+
+## Tools and Resources
+The project was developed in Python, utilizing libraries such as Pillow for image processing. Data was sourced from googling different images, mainly for testing purposes.
+
+<p align="center">
+    [zebra](https://animaldiversity.org/accounts/Equus_zebra/) [white screen](https://www.ledr.com/colours/white.htm) [cowboy man](https://pixabay.com/photos/people-cowboy-male-hat-person-875597/)
+</p>
